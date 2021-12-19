@@ -3,11 +3,13 @@ package com.example.demo_project.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "demo_user")

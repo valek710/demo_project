@@ -18,11 +18,11 @@ public class UserService {
     private final UserRepo userRepo;
 
     public List<UserDTO> getUsers() {
-        return userRepo.getUsers();
+        return userRepo.findAll();
     }
 
     public UserDTO getUser(long id) {
-        return userRepo.getUser(id);
+        return userRepo.findById(id).orElse(null);
     }
 
     public UserDTO addUser(@NonNull UserDTO userDTO) {
@@ -35,7 +35,7 @@ public class UserService {
 
     @PostConstruct
     public void populateData() {
-        if (userRepo.getUsers().size() == 0) {
+        if (userRepo.findAll().size() == 0) {
             userRepo.saveAll(List.of(
                     new UserDTO("test", "test", 18),
                     new UserDTO("test1", "test1", 25),
