@@ -7,8 +7,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,11 +22,13 @@ import static org.springframework.http.HttpStatus.*;
 @RequestMapping("/api")
 @Api(value = "User Rest Controller")
 @SuppressWarnings("unchecked")
+@Component
 public class UserController {
 
     @Autowired
     private final UserService userService;
 
+    @Cacheable(value = "users")
     @ApiOperation(value = "Get all users ", tags = "User")
     @GetMapping("/users")
     public @ResponseBody
@@ -32,6 +36,8 @@ public class UserController {
         return new ResponseEntity<>(userService.getUsers(), OK);
     }
 
+
+    @Cacheable(value = "user", key = "#id")
     @ApiOperation(value = "Get user", tags = "User")
     @GetMapping(value ="/user/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -43,12 +49,14 @@ public class UserController {
         return new ResponseEntity<>(userService.getUser(id), OK);
     }
 
+
     @ApiOperation(value = "Post user ", tags = "User")
     @PostMapping("/user")
     public @ResponseBody
     ResponseEntity<UserDTO> postUser(@RequestBody User user) {
         return new ResponseEntity<>(userService.addUser(new UserDTO(user.getFirstName(), user.getLastName(), user.getAge())), CREATED);
     }
+
 
     @ApiOperation(value = "Delete user", tags = "User")
     @DeleteMapping(value = "/user/{id}",
@@ -61,6 +69,7 @@ public class UserController {
         userService.deleteUser(user);
         return new ResponseEntity<>(ACCEPTED);
     }
+
 
     @ApiOperation(value = "Update user", tags = "User")
     @PutMapping(value = "/user/{id}",
