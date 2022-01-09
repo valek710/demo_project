@@ -23,7 +23,7 @@ public class CacheService {
           });
     }
 
-    @Scheduled(fixedDelay = 5, timeUnit = SECONDS)
+    @Scheduled(fixedDelay = 30, timeUnit = SECONDS)
     public void evictAllCachesAtIntervals() {
         evictAllCaches();
     }

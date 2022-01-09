@@ -85,7 +85,7 @@ public class UserController {
         userDTO.setAge(user.getAge());
         userService.addUser(userDTO);
 
-        return new ResponseEntity<>(ACCEPTED);
+        return new ResponseEntity<>(OK);
     }
 
     @SuppressWarnings("rawtypes")
