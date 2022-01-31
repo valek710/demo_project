@@ -4,11 +4,10 @@ import com.example.demo_project.dto.UserDTO;
 import com.example.demo_project.repository.UserRepo;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,12 +35,11 @@ public class UserService {
     @PostConstruct
     public void populateData() {
         if (userRepo.findAll().size() == 0) {
-            userRepo.saveAll(List.of(
-                    new UserDTO("test", "test", 18),
-                    new UserDTO("test1", "test1", 25),
-                    new UserDTO("test2", "test2", 28),
-                    new UserDTO("test5", "test5", 31)
-            ));
+            var list = new ArrayList<UserDTO>();
+            for (int i = 0; i < 1000; i++)
+                list.add(new UserDTO("testName" + i, "testLastName" + i, 18));
+
+            userRepo.saveAll(list);
         }
     }
 }
