@@ -66,13 +66,17 @@ services:
       - demo-network
 
   demo-app:
+    image: maven:3.8.4-openjdk-11-slim
     depends_on:
       postgres:
         condition: service_healthy
-    build: .
+    command: mvn spring-boot:run -DskipTests
     ports:
       - "8081:8081"
       - "8082:8082"
+    volumes:
+      - .:/usr/src/mymaven:rw
+    working_dir: /usr/src/mymaven
 
 networks:
   demo-network:

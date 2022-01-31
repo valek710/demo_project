@@ -2,10 +2,8 @@
 
 ## Prerequisites:
 
-1. Java 11+
-2. Maven
-3. Docker
-4. Docker Compose
+1. Docker
+2. Docker Compose
 
 ## Installation (linux):
 
@@ -18,21 +16,6 @@ If all went well, the version should be displayed. Something like:
 
 ````
 sdkman 5.13.1
-````
-
-### Java and Maven
-
-1. `sdk i java 11.0.11.j9-adpt`
-2. `mvn -v`
-
-If all went well, the version should be displayed. Something like:
-
-````
-Apache Maven 3.6.3
-Maven home: /usr/share/maven
-Java version: 11.0.11, vendor: AdoptOpenJDK, runtime: /home/valentyn/.sdkman/candidates/java/11.0.11.j9-adpt
-Default locale: ru_UA, platform encoding: UTF-8
-OS name: "linux", version: "5.4.0-60-generic", arch: "amd64", family: "unix"
 ````
 
 ### Docker and Docker Compose
@@ -81,8 +64,7 @@ docker-compose version 1.27.4, build 40524192
 
 ## Run application:
 
-1. `mvn clean package -DskipTests`
-2. `docker-compose up -d`
+1.`docker-compose up -d`
 
 ## Resources:
 - Swagger - http://localhost:8081/swagger-ui.html
